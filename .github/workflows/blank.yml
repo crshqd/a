@@ -23,6 +23,7 @@ jobs:
         run: node main/build.js
       - name: Commit changes to main
         run: |
+          cd prod
           date > generated.txt
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
