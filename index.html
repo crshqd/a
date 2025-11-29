@@ -118,36 +118,33 @@
         <script>
             let bloburl = "";
             async function loadFile(url) {
-                let res = await fetch(url);
-                let x = await res.text();
-                return x;
+                const res = await fetch(url);
+                return await res.text();
             }
-            let v = loadFile("./a/version.txt");
-            function about() {
-                alert("cheesecake "+v+"\nLayout made by me\nToolbar base made by www.w3schools.com\nLoad script script made by Brian P. Logan\nGames sourced by me\nHave fun :)")
-            }
-            window.addEventListener('load', function() {
-                openpage();
-            });
             window.addEventListener('message', function(event) {
                 if (event.origin === window.location.origin) {
                     if (event.data && event.data.command === 'openPage') {
                         openpage(event.data.pageName);
                     }
-                } else {
-                    alert("so the program isnt the program when clicking the link somehow");
                 }
             });
+            let versionText = "";
+            loadFile("./a/version.txt").then(v => versionText = v);
             async function openpage(name = "index") {
-                URL.revokeObjectURL(bloburl);
-                let html = await loadFile("./a/"+name+".html");
-                let blob = new Blob([html], {type: "text/html"});
-                let url = URL.createObjectURL(blob);
-                bloburl = url;
-                document.querySelector("iframe").src = url;
-                document.querySelector("iframe").setAttribute("sandbox", "allow-downloads allow-forms allow-modals allow-orientation-lock allow-pointer-lock allow-popups allow-popups-to-escape-sandbox allow-presentation allow-same-origin allow-scripts allow-top-navigation allow-top-navigation-by-user-activation");
-                document.querySelector("iframe").setAttribute("allow", "*");
+                if (bloburl) URL.revokeObjectURL(bloburl);
+                const html = await loadFile(`./a/${name}.html`);
+                const blob = new Blob([html], {type:"text/html"});
+                bloburl = URL.createObjectURL(blob);
+                const frame = document.getElementById("mainframe");
+                frame.src = bloburl;
+                frame.sandbox = "allow-same-origin allow-scripts allow-popups allow-forms";
             }
+            function about() {
+                alert(`cheesecake ${versionText || versionText==""
+                    ? versionText 
+                    : "(loading version?)"}\nmade by r guy • games are great\nhave fun :)`);
+            }
+            (window.onload = () => openpage());
             function ohcrap() {
                 window.location.replace("https://romeo.schoology.com/home");
             }
