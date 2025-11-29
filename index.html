@@ -130,9 +130,9 @@
                 script.src = url;
                 document.head.appendChild(script);
             }
-            loadScript("https://hikarunakamura.getenjoyment.net/a/main.php?cacheisstupid="+Date.now()+Math.floor(Math.random()*1000));
             function about() {
-                alert("cheesecake v"+v+"\nLayout made by me\nToolbar base made by www.w3schools.com\nLoad script script made by Brian P. Logan\nGames sourced by me\nHave fun :)")
+                let v = loadFile("./a/version.txt");
+                alert("cheesecake "+v+"\nLayout made by me\nToolbar base made by www.w3schools.com\nLoad script script made by Brian P. Logan\nGames sourced by me\nHave fun :)")
             }
             window.addEventListener('load', function() {
                 openpage();
