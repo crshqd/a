@@ -1,5 +1,5 @@
 const fs = require('fs');
-fs.cp("./main/fetchable/","./prod/a/", {recursive: true}, (err) => {if (err) console.log(err)});
+fs.cp("./main/a/","./prod/a/", {recursive: true}, (err) => {if (err) console.log(err)});
 const data = fs.readFileSync('./main/index.html', 'utf8');
 fs.writeFile('./prod/nice.html', atob("PCEtLQouIyMuLiMjLi4uIyMjIy4uLi4jIyMjLi4uIyMuLiMjLi4jIyMjIyMuLiMjIyMjLi4uIyMuLi4jIy4uLiMjIyMuLi4jIyMjIy4uLiMjIyMjIy4uLi4uLi4uLi4uIyMjIy4uLiMjLi4jIy4KLiMjLi4jIy4uIyMuLiMjLi4jIy4uIyMuLiMjLiMjLi4uIyMuLi4uLi4jIy4uIyMuLiMjIy4jIyMuLiMjLi4jIy4uIyMuLiMjLi4jIy4uLi4uLi4uLi4uLi4uIyMuLiMjLi4jIyMuIyMuCi4jIyMjIyMuLiMjIyMjIy4uIyMuLi4uLi4jIyMjLi4uLiMjIyMuLi4uIyMjIyMuLi4jIy4jLiMjLi4jIy4uIyMuLiMjLi4jIy4uIyMjIy4uLi4uLi4uLi4uLiMjLi4jIy4uIyMuIyMjLgouIyMuLiMjLi4jIy4uIyMuLiMjLi4jIy4uIyMuIyMuLi4jIy4uLi4uLiMjLi4jIy4uIyMuLi4jIy4uIyMuLiMjLi4jIy4uIyMuLiMjLi4uLi4uLi4uLi4uLi4jIy4uIyMuLiMjLi4jIy4KLiMjLi4jIy4uIyMuLiMjLi4uIyMjIy4uLiMjLi4jIy4uIyMjIyMjLi4jIy4uIyMuLiMjLi4uIyMuLi4jIyMjLi4uIyMjIyMuLi4jIyMjIyMuLi4uLi4uLi4uLiMjIyMuLi4jIy4uIyMuCi0tPgo8c2NyaXB0PgogICAgbGV0IGJsb2IgPSBuZXcgQmxvYihbYXRvYigi")+btoa(data)+atob("IildLCB7dHlwZTogInRleHQvaHRtbCJ9KTsKICAgIGxldCB1cmwgPSBVUkwuY3JlYXRlT2JqZWN0VVJMKGJsb2IpOwogICAgcGFyZW50LnBvc3RNZXNzYWdlKHsiYSI6IHVybH0sICIqIik7Cjwvc2NyaXB0Pg=="), (err) => {
   if (err) throw err;

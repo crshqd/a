@@ -117,21 +117,13 @@
         </div>
         <script>
             let bloburl = "";
-            function loadFile(url) {
-                let x = "";
-                fetch(url)
-                    .then(response => response.text())
-                    .then(text => x = text)
-                    .catch(error => console.error('Error:', error));
+            async function loadFile(url) {
+                let res = await fetch(url);
+                let x = await res.text();
                 return x;
             }
-            function loadScript(url) {
-                let script = document.createElement('script');
-                script.src = url;
-                document.head.appendChild(script);
-            }
+            let v = loadFile("./a/version.txt");
             function about() {
-                let v = loadFile("./a/version.txt");
                 alert("cheesecake "+v+"\nLayout made by me\nToolbar base made by www.w3schools.com\nLoad script script made by Brian P. Logan\nGames sourced by me\nHave fun :)")
             }
             window.addEventListener('load', function() {
@@ -146,9 +138,9 @@
                     alert("so the program isnt the program when clicking the link somehow");
                 }
             });
-            function openpage(name = "index") {
+            async function openpage(name = "index") {
                 URL.revokeObjectURL(bloburl);
-                let html = loadFile("./a/"+name+".html");
+                let html = await loadFile("./a/"+name+".html");
                 let blob = new Blob([html], {type: "text/html"});
                 let url = URL.createObjectURL(blob);
                 bloburl = url;
