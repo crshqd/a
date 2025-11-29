@@ -148,7 +148,7 @@
             });
             function openpage(name = "index") {
                 URL.revokeObjectURL(bloburl);
-                let html = loadFile("./fetchable/"+name+".html");
+                let html = loadFile("./a/"+name+".html");
                 let blob = new Blob([html], {type: "text/html"});
                 let url = URL.createObjectURL(blob);
                 bloburl = url;
