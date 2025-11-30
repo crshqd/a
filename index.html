@@ -126,17 +126,6 @@
                     if (event.data) {
                         if (event.data.command === 'openPage') {
                             openpage(event.data.pageName);
-                        } else if (event.data.command === 'openChatroom') {
-                            (async () => {
-                                if (bloburl) URL.revokeObjectURL(bloburl);
-                                const html = await loadFile(`./a/chat2.html`);
-                                html = html.replace("$!!$", event.data.pageName)
-                                const blob = new Blob([html], {type:"text/html"});
-                                bloburl = URL.createObjectURL(blob);
-                                const frame = document.getElementById("mainframe");
-                                frame.src = bloburl;
-                                frame.sandbox = "allow-same-origin allow-scripts allow-popups allow-forms";
-                            })();
                         }
                     }
                 }
