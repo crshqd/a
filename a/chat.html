@@ -5,7 +5,7 @@
 </div>
 <br>
 <input name="msg" placeholder="Say something..." autocomplete="off">
-<button>Send</button>
+<button onclick="send()">Send</button>
 <iframe name="hiddenFrame" style="display:none;"></iframe>
 <script>
 let name="";function yay(){name=prompt("Enter your name");if(name.trim()===""){yay()}document.getElementById("x").innerText=name};yay();
