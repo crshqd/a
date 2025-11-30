@@ -9,7 +9,7 @@
 <iframe name="hiddenFrame" style="display:none;"></iframe>
 <script>
 let name="";function yay(){name=prompt("Enter your name");if(name.trim()===""){yay()}document.getElementById("x").innerText=name};yay();
-let url = "https://api.jsonbin.io/v3/b/692ba53ad0ea881f4008a960";
+let url = "https://api.jsonstorage.net/v1/json/7ec5df05-e3fd-4115-a2b7-4e72d46f3149/4b85069c-430d-402a-a08a-40eecc37ca29";
 let notsecret = "$2a$10$3lgorpSmHz/j1vw5k0Mkeu1WhTVTvWyPQm8KAN/rPbRp641W/Tjpa";
 function escapeHTML(str){
     var p = document.createElement("p");
@@ -17,9 +17,7 @@ function escapeHTML(str){
     return p.innerHTML;
 }
 async function ref() {
-    const res = await fetch(url + "/latest", {
-        headers: { "X-Master-Key": notsecret }
-    });
+    const res = await fetch(url);
     const data = await res.json();
     const msgs = data.record.messages || [];
     const chatBox = document.getElementById("chatBox");
@@ -30,22 +28,13 @@ async function send() {
     const text = document.getElementById("msg").value;
     if(!text) return;
     
-    const res = await fetch(url + "/latest", {
-        headers: {
-            "X-Master-Key": notsecret,
-            "Content-Type": "application/json"
-        }
-    });
+    const res = await fetch(url);
     const data = await res.json();
     const messages = data.record.messages || [];
     messages.push({name, text});
     
-    await fetch(url, {
+    await fetch(url+"?apiKey=ed5d2270-5dac-4811-b221-82b445f097a7", {
         method: "PUT",
-        headers: {
-            "X-Master-Key": notsecret,
-            "Content-Type": "application/json"
-        },
         body: JSON.stringify({messages})
     });
     
