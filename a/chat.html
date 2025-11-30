@@ -8,7 +8,7 @@
 <button onclick="send()">Send</button>
 <iframe name="hiddenFrame" style="display:none;"></iframe>
 <script>
-let name="";function yay(){name=prompt("Enter your name");if(name.trim()===""){yay()}document.getElementById("x").innerText=name};yay();
+let name="";function yay(){name=prompt("Enter your name");if(name.trim()===""||name===false){yay()}document.getElementById("x").innerText=name};yay();
 let url = "https://api.jsonstorage.net/v1/json/7ec5df05-e3fd-4115-a2b7-4e72d46f3149/4b85069c-430d-402a-a08a-40eecc37ca29";
 let notsecret = "$2a$10$3lgorpSmHz/j1vw5k0Mkeu1WhTVTvWyPQm8KAN/rPbRp641W/Tjpa";
 function escapeHTML(str){
