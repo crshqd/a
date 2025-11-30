@@ -11,7 +11,7 @@
                 let req = new XMLHttpRequest();
                 req.onreadystatechange = () => {
                     if (req.readyState == XMLHttpRequest.DONE) {
-                        txt = JSON.parse(req.responseText).record;
+                        txt = JSON.parse(req.responseText);
                         let len = txt.length;
                         txt.push(document.querySelector("textarea").value);
                         let req2 = new XMLHttpRequest();
@@ -20,13 +20,13 @@
                                 alert("suggested! now i have "+len-1+" suggestions!")
                             }
                         };
-                        req2.open("PUT", "https://api.jsonbin.io/v3/b/69166f6e43b1c97be9ac0589?meta=false", true);
+                        req2.open("PUT", "https://api.jsonstorage.net/v1/json/7ec5df05-e3fd-4115-a2b7-4e72d46f3149/d58d9bd6-264f-4f9d-98c7-3f92e025e7f9?apiKey=ed5d2270-5dac-4811-b221-82b445f097a7", true);
                         req2.setRequestHeader("Content-Type", "application/json");
                         req2.send(JSON.stringify(txt));
                         
                     }
                 };
-                req.open("GET", "https://api.jsonbin.io/v3/b/69166f6e43b1c97be9ac0589/latest", true);
+                req.open("GET", "https://api.jsonstorage.net/v1/json/7ec5df05-e3fd-4115-a2b7-4e72d46f3149/d58d9bd6-264f-4f9d-98c7-3f92e025e7f9", true);
                 req.send();
             }
         </script>
