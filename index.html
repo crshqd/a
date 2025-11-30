@@ -139,7 +139,7 @@
                 bloburl = URL.createObjectURL(blob);
                 const frame = document.getElementById("mainframe");
                 frame.src = bloburl;
-                frame.sandbox = "allow-same-origin allow-scripts allow-popups allow-forms";
+                frame.sandbox = "allow-same-origin allow-scripts allow-popups allow-forms allow-modals";
             }
             function about() {
                 alert(`cheesecake ${versionText || versionText==""
