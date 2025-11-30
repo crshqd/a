@@ -1,33 +1,77 @@
-<style>*{font-family:system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;}.c,b{font-family:cursive;}</style>
-<h2 class="c">Chatroom</h2>
-<p>currently named <b id="x"></b></p>
-<div id="chatBox">
-</div>
-<br>
-<input name="msg" placeholder="Say something..." autocomplete="off" >
-<button onclick="send()">Send</button>
-<iframe name="hiddenFrame" style="display:none;"></iframe>
-<script>
-let name="";function yay(){name=prompt("Enter your name");if(name===null){yay()}if(name.trim()===""){yay()}document.getElementById("x").innerText=name};yay();
-function escapeHTML(str){
-    var p = document.createElement("p");
-    p.appendChild(document.createTextNode(str));
-    return p.innerHTML;
-}
-async function ref() {
-    const res = await fetch("https://cheese1995.zya.me/t/txt.php");
-    const data = await res.json();
-    const msgs = data.record.messages || [];
-    const chatBox = document.getElementById("chatBox");
-    chatBox.innerHTML = msgs.slice(-20).map(m => `<b>${escapeHTML(m.name)}:</b> ${escapeHTML(m.text)}`).join("<br>");
-    chatBox.scrollTop = chatBox.scrollHeight;
-}
-async function send() {
-    const text = document.getElementById("msg").value;
-    if(text.trim()==="") return;
-    await fetch("https://cheese1995.zya.me/t/send.php?name="+name+"&msg="+text);
-    document.getElementById("msg").value = "";
-    ref();
-}
-setInterval(ref, 1000);
-</script>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat Room</title>
+    <style>
+        * {
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+        }
+        .c, b {
+            font-family: cursive;
+        }
+    </style>
+</head>
+<body>
+    <h2 class="c">Chatroom</h2>
+    <p>currently named <b id="x"></b></p>
+    <div id="chatBox"></div>
+    <br>
+    <input id="msg" name="msg" placeholder="Say something..." autocomplete="off">
+    <button id="sendButton">Send</button>
+
+    <script type="module">
+        import { createClient } from "https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm";
+
+        const supabase = createClient(
+            "https://hmschbpwgwnienrxjwfc.supabase.co",
+            "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imhtc2NoYnB3Z3duaWVucnhqd2ZjIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjQ0OTA4NzAsImV4cCI6MjA4MDA2Njg3MH0.fN16-7BxInZ_4mX1WJb933aB93iqwETVly0doXxr4cs"
+        );
+
+        let name = "";
+
+        function askName() {
+            name = prompt("Enter your name");
+            while (name === null || name.trim() === "") {
+                name = prompt("Enter your name");
+            }
+            document.getElementById("x").innerText = name;
+        }
+
+        function escapeHTML(str) {
+            var p = document.createElement("p");
+            p.appendChild(document.createTextNode(str));
+            return p.innerHTML;
+        }
+
+        async function load() {
+            const { data } = await supabase
+                .from("chat")
+                .select()
+                .order("created_at", { ascending: true })
+                .limit(20);
+
+            document.getElementById("chatBox").innerHTML =
+                data.map(r => `<b>${escapeHTML(r.name)}:</b> ${escapeHTML(r.msg)}`).join("<br>");
+        }
+
+        async function sendMsg() {
+            const msg = document.getElementById("msg").value;
+            if (!msg) return;
+
+            await supabase.from("chat").insert({ name, msg });
+            document.getElementById("msg").value = "";
+            load();
+        }
+
+        // Event listener for the send button
+        document.getElementById("sendButton").onclick = sendMsg;
+
+        // Initialize
+        askName();
+        load();
+        setInterval(load, 1000);
+    </script>
+</body>
+</html>
