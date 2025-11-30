@@ -17,7 +17,7 @@
                         let req2 = new XMLHttpRequest();
                         req2.onreadystatechange = () => {
                             if (req2.readyState == XMLHttpRequest.DONE) {
-                                alert("suggested! now i have "+len-1+" suggestions!")
+                                alert("suggested! now i have "+(len-1)+" suggestions!")
                             }
                         };
                         req2.open("PUT", "https://api.jsonstorage.net/v1/json/7ec5df05-e3fd-4115-a2b7-4e72d46f3149/d58d9bd6-264f-4f9d-98c7-3f92e025e7f9?apiKey=ed5d2270-5dac-4811-b221-82b445f097a7", true);
