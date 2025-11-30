@@ -8,7 +8,7 @@
 <button onclick="send()">Send</button>
 <iframe name="hiddenFrame" style="display:none;"></iframe>
 <script>
-let name="";function yay(){name=prompt("Enter your name").substr(19);if(name.trim()===""||name===false){yay()}document.getElementById("x").innerText=name};yay();
+let name="";function yay(){name=prompt("Enter your name");if(name.trim()===""||name===null){yay()}document.getElementById("x").innerText=name};yay();
 function escapeHTML(str){
     var p = document.createElement("p");
     p.appendChild(document.createTextNode(str));
