@@ -129,7 +129,8 @@
                         } else if (event.data.command === 'openChatroom') {
                             (async () => {
                                 if (bloburl) URL.revokeObjectURL(bloburl);
-                                const html = await loadFile(`http://hikarunakamura.getenjoyment.net/a/chat.php?name=`+event.data.pageName);
+                                const html = await loadFile(`./a/chat2.html`);
+                                html = html.replace("$!!$", event.data.pageName)
                                 const blob = new Blob([html], {type:"text/html"});
                                 bloburl = URL.createObjectURL(blob);
                                 const frame = document.getElementById("mainframe");

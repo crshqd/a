@@ -1,0 +1,54 @@
+<style>*{font-family:system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;}.c,b{font-family:cursive;}</style>
+<h2 class="c">Chatroom</h2>
+<p>currently named <b>$!!$</b></p>
+<div id="chatBox">
+</div>
+<br>
+<input name="msg" placeholder="Say something..." autocomplete="off">
+<button>Send</button>
+<iframe name="hiddenFrame" style="display:none;"></iframe>
+<script>
+let name = "$!!$";
+function escapeHTML(str){
+    var p = document.createElement("p");
+    p.appendChild(document.createTextNode(str));
+    return p.innerHTML;
+}
+async function ref() {
+    const res = await fetch(URL + "/latest", {
+        headers: { "X-Master-Key": SECRET_KEY }
+    });
+    const data = await res.json();
+    const msgs = data.record.messages || [];
+    const chatBox = document.getElementById("chatBox");
+    chatBox.innerHTML = msgs.slice(-20).map(m => `<b>${escapeHTML(m.name)}:</b> ${escapeHTML(m.text)}`).join("<br>");
+    chatBox.scrollTop = chatBox.scrollHeight;
+}
+async function send() {
+    const text = document.getElementById("msg").value;
+    if(!text) return;
+    
+    const res = await fetch(URL + "/latest", {
+        headers: {
+            "X-Master-Key": SECRET_KEY,
+            "Content-Type": "application/json"
+        }
+    });
+    const data = await res.json();
+    const messages = data.record.messages || [];
+    messages.push({name, text});
+    
+    await fetch(URL, {
+        method: "PUT",
+        headers: {
+            "X-Master-Key": SECRET_KEY,
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({messages})
+    });
+    
+    document.getElementById("msg").value = "";
+    ref();
+}
+setInterval(ref, 1000);
+</script>
