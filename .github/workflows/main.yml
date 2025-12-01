@@ -1,19 +1,19 @@
 name: Publish to FTP
 on:
   push:
-      branches:
-        - prod
+    branches:
+      - prod
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout prod branch
         uses: actions/checkout@v6
-      - name: Publish to dn4xd8rsly.getenjoyment.net
+      - name: Deploy to AwardSpace FTP
         uses: SamKirkland/FTP-Deploy-Action@v4.3.6
         with:
           server: f33-preview.awardspace.net
-          username: 4649070_DN4xd8rslY 
-          password: ${{ secrets.pwd }}
+          username: 4649070_DN4xd8rslY
+          password: "#QWERTYuiop0"
       - name: yippee lol :>
         run: "echo JCRcICAgICAkJFwgJCQkJCQkXCAkJCQkJCQkXCAgJCQkJCQkJFwgICQkJCQkJCQkXCAkJCQkJCQkJFwgClwkJFwgICAkJCAgfFxfJCQgIF98JCQgIF9fJCRcICQkICBfXyQkXCAkJCAgX19fX198JCQgIF9fX19ffAogXCQkXCAkJCAgLyAgICQkIHwgICQkIHwgICQkIHwkJCB8ICAkJCB8JCQgfCAgICAgICQkIHwgICAgICAKICBcJCQkJCAgLyAgICAkJCB8ICAkJCQkJCQkICB8JCQkJCQkJCAgfCQkJCQkXCAgICAkJCQkJFwgICAgCiAgIFwkJCAgLyAgICAgJCQgfCAgJCQgIF9fX18vICQkICBfX19fLyAkJCAgX198ICAgJCQgIF9ffCAgIAogICAgJCQgfCAgICAgICQkIHwgICQkIHwgICAgICAkJCB8ICAgICAgJCQgfCAgICAgICQkIHwgICAgICAKICAgICQkIHwgICAgJCQkJCQkXCAkJCB8ICAgICAgJCQgfCAgICAgICQkJCQkJCQkXCAkJCQkJCQkJFwgCiAgICBcX198ICAgIFxfX19fX198XF9ffCAgICAgIFxfX3wgICAgICBcX19fX19fX198XF9fX19fX19ffAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIA== | base64 --decode"
