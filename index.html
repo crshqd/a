@@ -132,7 +132,7 @@
                 }
             });
             let versionText = "";
-            (async () => {await loadFile(`./a/version.txt?caca=${Date.now()}${Math.floor(Math.random() * 9999)}${Math.floor(Math.PI*1000000)}`).then(v => versionText = v);})();
+            (async () => {await loadFile("./a/version.txt").then(v => versionText = v);})();
             async function openpage(name = "index") {
                 if (bloburl) URL.revokeObjectURL(bloburl);
                 const html = await loadFile(`./a/${name}.html?caca=${Date.now()}${Math.floor(Math.random() * 9999)}${Math.floor(Math.PI*1000000)}`);
