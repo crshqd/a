@@ -28,3 +28,4 @@ jobs:
           server: f33-preview.awardspace.net
           username: 4649070_DN4xd8rslY
           password: ${{ secrets.PWD }}
+          local-dir: ./prod/
