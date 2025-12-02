@@ -6,6 +6,7 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    environment: lllll
     steps:
       - name: Setup Node.js environment
         uses: actions/setup-node@v6.0.0
@@ -26,4 +27,4 @@ jobs:
         with:
           server: f33-preview.awardspace.net
           username: 4649070_DN4xd8rslY
-          password: ${{ secrets.pwd }}
+          password: ${{ secrets.PWD }}
